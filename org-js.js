@@ -1,5 +1,5 @@
-var h2Color = 'white';
-var h3Color = 'white';
+let h2Color = 'white';
+let h3Color = 'white';
 
 onload = () => {
     console.log("Loading body");
@@ -10,9 +10,9 @@ onload = () => {
 
 
 onscroll = (event) => {
-    var scrolled=window.scrollY;
-    var mainTitle = document.getElementsByClassName("title")[0];
-    var titleStyle = mainTitle.style;
+    let scrolled=window.scrollY;
+    let mainTitle = document.getElementsByClassName("title")[0];
+    let titleStyle = mainTitle.style;
     if (scrolled > 20) {
 	titleStyle.transform = "rotate(-90deg) translateX(-100vh)";
 	titleStyle.width = "100vh";
@@ -28,7 +28,7 @@ function isEmpty(node) {
 }
 
 onclick = (event) => {
-    var cible = event.target;
+    let cible = event.target;
     if (cible.nodeName == 'DIV') {
 	cible.requestFullscreen();
     } else if (cible.nodeName == 'H2' || cible.nodeName == 'H3') {
