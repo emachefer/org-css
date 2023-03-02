@@ -219,12 +219,18 @@ svg {
 }
 
 .tag {
+    float: right;
     background-color: inherit;
     color: var(--fif-color);
     font-weight: bold;
 }
 .tag > span:before {
     content: "#";
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 :fullscreen {
