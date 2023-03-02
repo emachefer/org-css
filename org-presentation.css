@@ -4,14 +4,14 @@
     --thi-color: #F2AB27;
     --fou-color: #D9CAAD;
     --fif-color: #F24C27;
-    
+
     --def-color: var(--fif-color);
     --def-bg-color: #FEC;
     --rem-color: var(--sec-color);
     --rem-bg-color: #FEC;
     --exer-color: #2255DD;
     --exer-bg-color: #66AAFF;
-    
+
     /*Counters*/
     counter-reset: def-counter 0;
     counter-reset: rem-counter 0;
@@ -30,27 +30,6 @@ body {
     margin-left:max(20px, 10vw);
 }
 
-/* #table-of-contents { */
-/*     margin-top: 0; */
-/*     position: sticky; */
-/*     background-color: white; */
-/*     border: 5px solid var(--main-color); */
-/*     /\* width: 100%; *\/ */
-/*     z-index:900; */
-/*     /\* right: 20px; *\/ */
-/*     /\* left:80vw; *\/ */
-/*     top: 3vh; */
-/*     border-radius: 15px; */
-/*     overflow: hidden; */
-/* } */
-/* #table-of-contents ul li { */
-/*     display: inline-block; */
-/* } */
-/* #table-of-contents a:target > p { */
-/*     background-color: #04AA6D; */
-/*     color: white; */
-/* } */
-
 #org-div-home-and-up {
     color: var(--sec-color);
     position:sticky;
@@ -58,19 +37,21 @@ body {
     z-index:100000;
 }
 
+
 h1, h2, h3, h4 {
-  color: #222;
-  padding: 0.5em;
-  font-family: sans-serif;
-  background-color: white;
-  color: var(--main-color);
-  z-index: 100;
-  transition: transform 200ms ease-in-out;
-  transform-origin: 0% 0%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow:hidden;
-  margin-top: min(3em, 10vw);
+    cursor: pointer;
+    color: #222;
+    padding: 0.5em;
+    font-family: sans-serif;
+    background-color: white;
+    color: var(--main-color);
+    z-index: 100;
+    transition: transform 200ms ease-in-out;
+    transform-origin: 0% 0%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+    margin-top: min(3em, 10vw);
 }
 h1 {
     margin-top:0px;
@@ -112,15 +93,15 @@ a {
     text-decoration-color: orange;
     transition: 500ms linear 25ms;
 }
-a:after { 
+a:after {
   content: "";
   height: 10vh;
   /* left: 0;  */
   /* top: 0;  */
   width: 0px;
-  position: realtive; 
-  transition: all 0.3s ease 0s; 
-  -webkit-transition: all 0.3s ease 0s; 
+  position: realtive;
+  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
   /* z-index: -1; */
   background-color: orange;
 }
@@ -236,14 +217,6 @@ svg {
     display:block;
     margin:auto;
 }
-
-/* .outline-text-3 { */
-/*     display: flex; */
-/*     flex-flow: row wrap; */
-/* } */
-/* p, .outline-text-3 { */
-/*     flex: auto; */
-/* } */
 
 :fullscreen {
     display: table-cell;
