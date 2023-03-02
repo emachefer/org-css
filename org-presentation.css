@@ -218,6 +218,15 @@ svg {
     margin:auto;
 }
 
+.tag {
+    background-color: inherit;
+    color: var(--fif-color);
+    font-weight: bold;
+}
+.tag > span:before {
+    content: "#";
+}
+
 :fullscreen {
     display: table-cell;
     background-color: white;
