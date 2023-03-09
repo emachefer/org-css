@@ -1,0 +1,227 @@
+@import url("table.css")
+
+:root {
+    --main-color: #143B40;
+    --sec-color: #F2BF27;
+    --thi-color: #F2AB27;
+    --fou-color: #D9CAAD;
+    --fif-color: #F24C27;
+
+    --def-color: var(--fif-color);
+    --def-bg-color: #FEC;
+    --rem-color: var(--sec-color);
+    --rem-bg-color: #FEC;
+    --exer-color: #2255DD;
+    --exer-bg-color: #66AAFF;
+
+    /*Counters*/
+    counter-reset: def-counter 0;
+    counter-reset: rem-counter 0;
+    counter-reset: exer-counter 0;
+    counter-reset: exam-counter 0;
+    counter-reset: doc-counter 0;
+    font-size: 3vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    width:90vw;
+    margin-left:max(20px, 10vw);
+}
+
+#org-div-home-and-up {
+    color: var(--sec-color);
+    position:sticky;
+    top: 0;
+    z-index:100000;
+}
+
+
+h1, h2, h3, h4 {
+    cursor: pointer;
+    color: #222;
+    padding: 0.5em;
+    font-family: sans-serif;
+    background-color: white;
+    color: var(--main-color);
+    z-index: 100;
+    transition: transform 200ms ease-in-out;
+    transform-origin: 0% 0%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+    margin-top: min(3em, 10vw);
+}
+h1 {
+    margin-top:0px;
+    font-size: 5vh;
+    position: fixed;
+    width: 100vw;
+    z-index:1000;
+    height: 1em;
+    top: 0px;
+    left: 0px;
+    background-color: var(--main-color);
+    color:white;
+}
+h2 {
+    z-index:800;
+    position: sticky;
+    top: 0vh;
+    height: 1em;
+    font-size: 4vh;
+    background-color: var(--sec-color);
+    background-image: none;
+}
+h3 {
+    z-index:500;
+    position: sticky;
+    top: 7vh;
+    background-color: var(--thi-color);
+}
+
+a {
+    padding: 2px;
+    text-decoration: none;
+    color: darkslateblue;
+    border-bottom: 1.5pt;
+    border-bottom-color: orange;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 1.5pt;
+    text-decoration-color: orange;
+    transition: 500ms linear 25ms;
+}
+a:after {
+  content: "";
+  height: 10vh;
+  /* left: 0;  */
+  /* top: 0;  */
+  width: 0px;
+  position: realtive;
+  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  /* z-index: -1; */
+  background-color: orange;
+}
+
+a:hover:after{ width: 100%; }
+/* a:before { */
+/*   content: ""; */
+/*   position: relative; */
+/*   top: 100%; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   background: #f00; */
+/*   transition: .5s; */
+/*   z-index:-1; */
+/* } */
+
+/* a:hover:before { */
+/*     top: 0%; */
+/*     z-index: 2; */
+/* } */
+.org-src-container > pre {
+ padding: 10px;
+ overflow: auto;
+ background-color: #222;
+ color: #eee;
+}
+
+
+/* DEFINITIONS */
+.definition, .remark, .exemple, .exercice, .doc{
+    padding: 5px;
+    border : solid;
+    border-width: 2pt;
+    border-radius: 15px;
+    margin: 1em;
+}
+.definition::before, .remark::before, .exemple:before, .exercice:before, .doc::before {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.doc {
+    counter-increment: doc-counter 1;
+    color: var(--main-color);
+}
+.doc::before {
+    /* display: block; */
+    content: "Document " counter(doc-counter);
+    color: var(--main-color);
+    /* background-color: #222; */
+    /* color: #eee; */
+    /* width: 100%; */
+    /* padding: 5px; */
+}
+
+.definition {
+    counter-increment: def-counter 1;
+    border-color: var(--def-color);
+    background-color: var(--def-bg-color);
+}
+.definition::before {
+    color: var(--def-color);
+    content: "Définition "counter(def-counter) " \1F4D6";
+}
+
+.exemple, .exercice {
+    counter-increment: exam-counter 1;
+    border-color: var(--exer-color);
+}
+.exemple::before {
+    color: var(--exer-color);
+    content: "Exemple "counter(exam-counter);
+}
+.exercice::before {
+    color: var(--exer-color);
+    content: "Exercices";
+}
+
+
+.remark {
+    counter-increment: rem-counter 1;
+    border-color:  var(--rem-color);
+    background-color: var(--rem-bg-color);
+}
+.remark::before {
+    color: var(--rem-color);
+    content: "Remarque "counter(rem-counter);
+}
+
+.note {
+    padding: 10px;
+}
+
+svg {
+    display:block;
+    margin:auto;
+}
+
+.tag {
+    float: right;
+    background-color: inherit;
+    color: var(--fif-color);
+    font-weight: bold;
+}
+.tag > span:before {
+    content: "#";
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+:fullscreen {
+    display: table-cell;
+    background-color: white;
+    text-align: center;
+    vertical-align: center;
+    font-size: 5vh;
+}

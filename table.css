@@ -1,0 +1,22 @@
+
+th {
+    background-color: var(--main-color);
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: var(--thi-color);
+}
+tr:nth-child(odd) {
+    /* background-color: var(--fou-color); */
+    background-color: white;
+}
+tr:last-child {
+    background-color: lightsalmon;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border: hidden;
+}
