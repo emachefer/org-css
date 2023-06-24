@@ -1,16 +1,23 @@
 :root {
-    --main-color: #143B40;
-    --sec-color: #F2BF27;
-    --thi-color: #F2AB27;
-    --fou-color: #D9CAAD;
-    --fif-color: #F24C27;
+    --main-color: hsl(220 80% 10% / 90%);
+    --sec-color: hsl(40 100% 50%);
+    --thi-color: hsl(40 100% 60%);
+    --fou-color: hsl(40 100% 70%);
 
-    --def-color: var(--fif-color);
+    --def-color: var(--fou-color);
     --def-bg-color: #FEC;
     --rem-color: var(--sec-color);
     --rem-bg-color: #FEC;
     --exer-color: #2255DD;
     --exer-bg-color: #66AAFF;
+
+    --width: 90vw;
+    --height: 90vh;
+
+    --postHeight: 50pt;
+
+    --titleFontSize: 5vh;
+
 
     /*Counters*/
     counter-reset: def-counter 0;
@@ -18,111 +25,222 @@
     counter-reset: exer-counter 0;
     counter-reset: exam-counter 0;
     counter-reset: doc-counter 0;
-    font-size: 3vh;
+
+    counter-reset: sec-counter 0;
+    font-size: 12pt;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--sec-color) var(--main-color) ;
+    scrollbar-width: auto;
+    scrollbar-gutter: stable both-edges;
+
+    scroll-padding-block: 5em;
 }
 
 body {
-    width:90vw;
-    margin-left:max(20px, 10vw);
+    background-color: var(--main-color);
+}
+#content{
+    width: 95vw;
+    min-height: calc(100vh - 2*var(--postHeight));
+    margin: auto;
+}
+#postamble {
+    height: var(--postHeight);
+    display: grid;
+    text-align: center;
+    grid-auto-flow: column;
+    background-color: var(--main-color);
+    color: white;
+    display: grid;
+    overflow: hidden;
+}
+#postamble a {
+    color: white;
 }
 
-#org-div-home-and-up {
-    color: var(--sec-color);
-    position:sticky;
-    top: 0;
-    z-index:100000;
+/* TEST SCROLL SNAP */
+:is(#table-of-contents, .outline-2, #footnotes) {
+    --margin: 5em;
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    width: var(--width);
+    heigth: var(--height);
+    overflow-x: scroll;
+    overscroll-behavior-x: contain;
+    margin: var(--margin) auto;
+    gap: var(--margin);
 }
 
+#text-table-of-contents, #text-footnotes, .outline-3, .outline-text-2:only-of-type {
+    display: block;
+    padding: 0 10pt;
+    margin: auto;
+    width: var(--width);
+    height: var(--height);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    background-color: #eee;
+}
+.footdef {
+    display: flex;
+    align-content: start;
+}
+.footnum {
+    --fSize: 10pt;
+    font-size: var(--fSize);
+    position: relative;
+    top: calc(60% - var(--fSize)); /* Pour aligner numéro avec text*/
 
-h1, h2, h3, h4 {
+}
+.footnum::after {
+    content: ":\2000";
+}
+:is(.outline-text-3, .outline-text-4) {
+    padding: 1em;
+}
+
+:is(.outline-2 h2, .outline-3 h3, .outline-4 h4):hover {
     cursor: pointer;
-    color: #222;
+    opacity: 1;
+}
+
+
+/**** HEADERS ****/
+h1, h2, h3, h4 {
     padding: 0.5em;
     font-family: sans-serif;
     background-color: white;
     color: var(--main-color);
     z-index: 100;
-    transition: transform 200ms ease-in-out;
+    transition: font-size 200ms ease-in-out;
     transform-origin: 0% 0%;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow:hidden;
-    margin-top: min(3em, 10vw);
+    overflow: hidden;
+    text-align: center;
 }
+
 h1 {
     margin-top:0px;
-    font-size: 5vh;
+    font-size: var(--titleFontSize);
     position: fixed;
     width: 100vw;
     z-index:1000;
-    height: 1em;
     top: 0px;
     left: 0px;
     background-color: var(--main-color);
     color:white;
 }
+
 h2 {
-    z-index:800;
-    position: sticky;
-    top: 0vh;
-    height: 1em;
-    font-size: 4vh;
+    margin: auto;
+    height: calc(var(--height) / 3);
+    width: var(--width);
     background-color: var(--sec-color);
-    background-image: none;
+    font-size: 7vmin;
 }
 h3 {
-    z-index:500;
-    position: sticky;
-    top: 7vh;
+    font-size: 5vmin;
     background-color: var(--thi-color);
+    position: sticky;
+    top: 0pt;
 }
 
+.outline-2 h2 {
+    counter-increment: sec-counter;
+    counter-reset: subsec-counter 0;
+}
+
+.outline-2 h2:before {
+    content: counter(sec-counter)" | ";
+}
+
+.outline-3 h3 {
+    counter-increment: subsec-counter;
+    counter-reset: subsub-counter 0;
+}
+.outline-3 h3:before {
+    content: counter(sec-counter) "." counter(subsec-counter)" | ";
+}
+
+.outline-4 h4 {
+    counter-increment: subsub-counter;
+}
+.outline-4 h4:before {
+    content: counter(sec-counter) "." counter(subsec-counter)"." counter(subsub-counter) "|\2000";
+}
+
+
+
+/* To hide DIV elements */
+.hidden {
+    opacity: 0.7;
+    transition: 0.5s ease-out;
+}
+.hidden:hover {
+    opacity: 1;
+}
+
+.hidden :is(.outline-text-2, .outline-3, .outline-text-3,
+	    .outline-4, .outline-text-4,
+	    #text-table-of-contents, #text-footnotes, .lstToc) {
+    max-height: 0pt;
+    max-width: 0pt;
+    padding: 0pt;
+    overflow: hidden;
+    visibility: hidden;
+}
+:is(h2, h3, h4)::after{
+    content: "-";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    float:left;
+    border-radius: 50%
+}
+.hidden :is(h2, h3, h4)::after{
+    content: "+";
+    float:left;
+}
+
+
+/**** LINKS ****/
 a {
+    --bxcolor: var(--sec-color);
+    box-shadow: inset 0 0 0 0 var(--bxcolor);
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: 0.2s ease-in-out;
     padding: 2px;
-    text-decoration: none;
-    color: darkslateblue;
-    border-bottom: 1.5pt;
-    border-bottom-color: orange;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-thickness: 1.5pt;
-    text-decoration-color: orange;
-    transition: 500ms linear 25ms;
+    text-decoration: underline;
+    text-decoration-color: var(--bxcolor);
+    text-decoration-style: wavy;
+    color: var(--main-color);
 }
-a:after {
-  content: "";
-  height: 10vh;
-  /* left: 0;  */
-  /* top: 0;  */
-  width: 0px;
-  position: realtive;
-  transition: all 0.3s ease 0s;
-  -webkit-transition: all 0.3s ease 0s;
-  /* z-index: -1; */
-  background-color: orange;
+a:hover {
+    box-shadow: inset 0 -10em 0 0 var(--bxcolor);
 }
 
-a:hover:after{ width: 100%; }
-/* a:before { */
-/*   content: ""; */
-/*   position: relative; */
-/*   top: 100%; */
-/*   left: 0; */
-/*   width: 100%; */
-/*   height: 100%; */
-/*   background: #f00; */
-/*   transition: .5s; */
-/*   z-index:-1; */
-/* } */
+#org-div-home-and-up {
+    position:fixed;
+    display:  grid;
+    grid-auto-flow: column;
+    gap: 3pt;
+    bottom: 10pt;
+    right: 10pt;
+    z-index:100000;
+    font-size: 10pt;
+}
+#org-div-home-and-up a {
+    padding: 5pt;
+    background-color: var(--fou-color);
+    border: 2px solid var(--sec-color);
+}
 
-/* a:hover:before { */
-/*     top: 0%; */
-/*     z-index: 2; */
-/* } */
 .org-src-container > pre {
  padding: 10px;
  overflow: auto;
@@ -130,19 +248,21 @@ a:hover:after{ width: 100%; }
  color: #eee;
 }
 
+
+/**** TABLE ****/
 th {
     background-color: var(--main-color);
     color: white;
+    font-weight: bold;
 }
 tr:nth-child(even) {
-    background-color: var(--thi-color);
-}
-tr:nth-child(odd) {
-    /* background-color: var(--fou-color); */
     background-color: white;
 }
+tr:nth-child(odd) {
+    background-color: #ddd;
+}
 tr:last-child {
-    background-color: lightsalmon;
+    background-color: #bababa;
 }
 
 table {
@@ -152,66 +272,56 @@ table {
     border: hidden;
 }
 
-/* DEFINITIONS */
-.definition, .remark, .exemple, .exercice, .doc{
+
+/**** BLOCKS ****/
+div:where(.definition, .remark, .exemple, .exercice, .doc) {
     padding: 5px;
     border : solid;
     border-width: 2pt;
     border-radius: 15px;
     margin: 1em;
+    color: var(--txt-color, --main-color);
+    border-color: var(--border-color, --main-color);
+    background-color: var(--bg-color, tranparent);
 }
-.definition::before, .remark::before, .exemple:before, .exercice:before, .doc::before {
+
+div:is(.definition, .remark, .exemple, .exercice, .doc)::before {
     font-weight: bold;
     font-size: larger;
+    color: var(--border-color, --main-color);
+    content: var(--txt, "")  "\2001" attr(block-title);
 }
 
 .doc {
     counter-increment: doc-counter 1;
-    color: var(--main-color);
-}
-.doc::before {
-    /* display: block; */
-    content: "Document " counter(doc-counter);
-    color: var(--main-color);
-    /* background-color: #222; */
-    /* color: #eee; */
-    /* width: 100%; */
-    /* padding: 5px; */
+    --txt: "Document " counter(doc-counter);
 }
 
 .definition {
     counter-increment: def-counter 1;
-    border-color: var(--def-color);
-    background-color: var(--def-bg-color);
+    --border-color: var(--def-color);
+    --bg-color: var(--def-bg-color);
+    --txt: "Définition "counter(def-counter) " \1F4D6";
 }
-.definition::before {
-    color: var(--def-color);
-    content: "Définition "counter(def-counter) " \1F4D6";
-}
-
-.exemple, .exercice {
+.exemple {
     counter-increment: exam-counter 1;
-    border-color: var(--exer-color);
-}
-.exemple::before {
-    color: var(--exer-color);
-    content: "Exemple "counter(exam-counter);
-}
-.exercice::before {
-    color: var(--exer-color);
-    content: "Exercices";
+    --border-color: var(--exer-color);
+    --txt: "Exemple "counter(exam-counter);
 }
 
+.exercice {
+    --border-color: var(--exer-color);
+    --txt: "Exercice";
+}
 
 .remark {
     counter-increment: rem-counter 1;
-    border-color:  var(--rem-color);
-    background-color: var(--rem-bg-color);
+    --txt: "Remarque "counter(rem-counter);
+    --bg-color: var(--rem-bg-color);
+    --border-color: var(--rem-color);
 }
-.remark::before {
-    color: var(--rem-color);
-    content: "Remarque "counter(rem-counter);
-}
+
+/* End block */
 
 .note {
     padding: 10px;
@@ -224,8 +334,8 @@ svg {
 
 .tag {
     float: right;
-    background-color: inherit;
-    color: var(--fif-color);
+    background-color: none;
+    color: var(--fou-color);
     font-weight: bold;
 }
 .tag > span:before {
@@ -237,10 +347,32 @@ img {
     height: auto;
 }
 
-:fullscreen {
-    display: table-cell;
-    background-color: white;
+/**** Show TOC in index ****/
+ul.lstToc {
+    margin-top: calc(3*var(--titleFontSize));
+}
+:is(ul.lstToc, #table-of-contents ul) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-evenly;
+    gap: 5pt;
+    list-style-type: none;
+}
+
+:is(ul.lstToc, #table-of-contents ul) li a{
+    --bgcolor: var(--fou-color);
+    --bdcolor: var(--sec-color);
+    display: block;
     text-align: center;
-    vertical-align: center;
-    font-size: 5vh;
+    padding: 10pt;
+    width: max(20vw, 100pt);
+    background-color: var(--bgcolor);
+    border: solid var(--bdcolor);
+    font-weight: bold;
+}
+:is(ul.lstToc, #table-of-contents ul) ul li a{
+    --bgcolor: hsl(40 80% 80%);
+    --bdcolor: var(--sec-color);
+    padding: 5pt;
 }
